@@ -3,135 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đề Kiểm Tra Cuối Kỳ 1 - Toán 12 (Đề Chuẩn Ma Trận)</title>
+    <title>Đề Kiểm Tra Toán 12 - Theo Ma Trận (Đề Mới)</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         :root {
-            --primary: #0056b3;
-            --secondary: #6c757d;
+            --primary: #007bff;
             --success: #28a745;
             --danger: #dc3545;
             --light: #f8f9fa;
             --dark: #343a40;
         }
-        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f4f6f9; color: #333; line-height: 1.6; margin: 0; padding-bottom: 60px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; color: #333; line-height: 1.6; margin: 0; padding-bottom: 80px; }
         
-        /* Sticky Header */
-        .header-bar {
+        /* Header & Timer */
+        .fixed-header {
             position: fixed; top: 0; left: 0; width: 100%;
-            background: white; padding: 10px 20px;
+            background: white; padding: 15px 20px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             z-index: 1000; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;
         }
         .timer-badge {
-            font-size: 1.25rem; font-weight: bold; color: white;
-            background-color: var(--danger); padding: 5px 15px; border-radius: 20px;
+            font-size: 1.4rem; font-weight: bold; color: white;
+            background-color: var(--danger); padding: 5px 15px; border-radius: 50px;
         }
 
         /* Container */
-        .container { max-width: 960px; margin: 80px auto 20px; padding: 30px; background: white; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.05); }
+        .container { max-width: 960px; margin: 90px auto 20px; padding: 30px; background: white; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         
-        h1 { text-align: center; color: var(--primary); margin-bottom: 10px; }
-        .exam-info { text-align: center; font-style: italic; color: var(--secondary); margin-bottom: 30px; }
+        h1 { text-align: center; color: var(--primary); margin-bottom: 5px; }
+        .exam-info { text-align: center; font-style: italic; color: #666; margin-bottom: 30px; }
         
         .part-header {
             background-color: var(--primary); color: white;
-            padding: 10px 15px; margin-top: 40px; margin-bottom: 20px;
-            border-radius: 5px; font-weight: bold; text-transform: uppercase;
+            padding: 12px 20px; margin-top: 40px; margin-bottom: 20px;
+            border-radius: 5px; font-weight: bold; text-transform: uppercase; font-size: 1.1rem;
         }
 
-        /* Question Styles */
+        /* Question Box */
         .question-box {
-            border: 1px solid #dee2e6; border-radius: 5px;
-            padding: 20px; margin-bottom: 20px; background-color: white;
-            transition: transform 0.2s;
+            border: 1px solid #e9ecef; border-radius: 8px;
+            padding: 20px; margin-bottom: 20px; background-color: #fff;
+            transition: box-shadow 0.3s;
         }
-        .question-box:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .q-title { font-weight: bold; color: var(--primary); margin-bottom: 10px; display: block; }
+        .question-box:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .q-title { font-weight: bold; color: var(--primary); display: block; margin-bottom: 10px; font-size: 1.05rem; }
         
-        /* Tables */
-        table.custom-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.95rem; }
-        table.custom-table th, table.custom-table td { border: 1px solid #ced4da; padding: 8px; text-align: center; }
-        table.custom-table th { background-color: #e9ecef; }
+        /* Tables for Statistics */
+        table.data-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.95rem; }
+        table.data-table th, table.data-table td { border: 1px solid #dee2e6; padding: 10px; text-align: center; }
+        table.data-table th { background-color: #e9ecef; color: var(--dark); font-weight: 600;}
 
-        /* Options (Radio) */
-        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        /* Options for Part 1 */
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .option-label {
             display: flex; align-items: center; cursor: pointer;
-            padding: 10px; border: 1px solid #ced4da; border-radius: 5px;
+            padding: 12px; border: 1px solid #dee2e6; border-radius: 5px; transition: 0.2s;
         }
-        .option-label:hover { background-color: var(--light); }
+        .option-label:hover { background-color: #e2e6ea; border-color: var(--primary); }
         .option-label input { margin-right: 10px; transform: scale(1.2); }
 
-        /* True/False Layout */
-        .tf-item {
+        /* True/False for Part 2 */
+        .tf-row {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 10px 0; border-bottom: 1px dashed #ced4da;
+            padding: 12px 0; border-bottom: 1px dashed #dee2e6;
         }
         .tf-content { flex: 1; padding-right: 15px; }
-        .tf-choices { display: flex; gap: 20px; font-weight: bold; min-width: 120px; }
+        .tf-options { display: flex; gap: 20px; font-weight: bold; min-width: 130px; }
 
-        /* Short Answer Input */
+        /* Short Answer for Part 3 */
         .short-input {
             width: 100%; max-width: 300px; padding: 10px;
-            border: 2px solid #ced4da; border-radius: 5px; font-size: 1rem;
+            border: 2px solid #ced4da; border-radius: 5px; font-size: 1.1rem; margin-top: 10px;
         }
 
-        /* Result Feedback */
+        /* Feedback/Explanation */
         .feedback {
             margin-top: 15px; padding: 15px; border-radius: 5px;
-            display: none; background-color: #e2e6ea; border-left: 5px solid var(--secondary);
+            display: none; background-color: #f8f9fa; border-left: 5px solid #ccc; font-size: 0.95rem;
         }
-        .correct { border-left-color: var(--success); background-color: #d4edda; }
-        .incorrect { border-left-color: var(--danger); background-color: #f8d7da; }
+        .correct-fb { border-left-color: var(--success); background-color: #d4edda; color: #155724; }
+        .wrong-fb { border-left-color: var(--danger); background-color: #f8d7da; color: #721c24; }
 
-        /* Button */
+        /* Submit Button */
         .btn-submit {
-            display: block; width: 100%; padding: 15px;
+            display: block; width: 100%; padding: 16px;
             background-color: var(--success); color: white;
-            border: none; border-radius: 5px; font-size: 1.2rem; font-weight: bold;
-            cursor: pointer; margin-top: 30px; transition: background 0.3s;
+            border: none; border-radius: 5px; font-size: 1.3rem; font-weight: bold;
+            cursor: pointer; margin-top: 30px;
         }
         .btn-submit:hover { background-color: #218838; }
+        .btn-disabled { background-color: #6c757d; cursor: not-allowed; }
 
         /* Modal */
-        .modal-overlay {
+        .modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center;
+            background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center;
         }
         .modal-content {
-            background: white; padding: 40px; border-radius: 10px;
-            text-align: center; max-width: 500px; width: 90%;
+            background: white; padding: 40px; border-radius: 12px;
+            text-align: center; max-width: 500px; width: 90%; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
-        .score-display { font-size: 3rem; font-weight: bold; color: var(--primary); margin: 20px 0; }
-        
-        @media (max-width: 600px) {
-            .options-grid { grid-template-columns: 1fr; }
-        }
+        .score-display { font-size: 3.5rem; font-weight: 800; color: var(--primary); margin: 20px 0; }
+
+        @media (max-width: 768px) { .options-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-<div class="header-bar">
-    <div style="font-weight: bold; font-size: 1.1rem;">TOÁN 12 - KIỂM TRA CUỐI KỲ 1</div>
+<div class="fixed-header">
+    <div style="font-weight: bold; font-size: 1.2rem;">TOÁN 12 - ĐỀ SỐ 2 (MỚI)</div>
     <div class="timer-badge" id="timer">60:00</div>
 </div>
 
 <div class="container">
-    <h1>ĐỀ KIỂM TRA KHẢO SÁT CHẤT LƯỢNG</h1>
+    <h1>ĐỀ KIỂM TRA ĐỊNH KỲ MÔN TOÁN 12</h1>
     <div class="exam-info">
-        Thời gian: 60 phút | Cấu trúc: Theo ma trận 2025<br>
-        (Đề bài tự động đảo thứ tự câu hỏi mỗi lần tải lại trang)
+        Thời gian: 60 phút | Cấu trúc: Theo Ma Trận Đặc Tả 2025<br>
+        (Đề bài được đảo ngẫu nhiên mỗi lần tải lại trang)
     </div>
 
     <form id="quizForm">
-        <div id="quiz-content"></div>
-        <button type="button" class="btn-submit" onclick="submitQuiz()">NỘP BÀI</button>
+        <div id="render-area"></div>
+        <button type="button" class="btn-submit" onclick="submitQuiz()">NỘP BÀI & XEM ĐIỂM</button>
     </form>
 </div>
 
-<div class="modal-overlay" id="resultModal">
+<div class="modal" id="resultModal">
     <div class="modal-content">
         <h2>KẾT QUẢ LÀM BÀI</h2>
         <div class="score-display" id="finalScore">0.0</div>
@@ -141,187 +139,168 @@
 </div>
 
 <script>
-    // ================= DỮ LIỆU ĐỀ BÀI (Xây dựng dựa trên Ma trận & Đặc tả) =================
+    // ================= DỮ LIỆU ĐỀ BÀI (DỮ LIỆU MỚI) =================
 
-    // PHẦN 1: TRẮC NGHIỆM (10 câu - 40% điểm - Mỗi câu 0.25đ -> Quy thang 10 sau)
-    const part1DB = [
+    // --- PHẦN 1: TRẮC NGHIỆM (10 CÂU) ---
+    const part1Data = [
         {
             id: "p1_1",
-            text: "Cho hàm số \\(y=f(x)\\) có bảng biến thiên như sau: <br> Hàm số đã cho đồng biến trên khoảng nào dưới đây?",
-            // Mô phỏng BBT: đi lên (-inf; -1), đi xuống (-1; 1), đi lên (1; +inf)
-            content: "<table class='custom-table'><tr><th>x</th><td>$-\\infty$</td><td>-1</td><td>1</td><td>$+\\infty$</td></tr><tr><th>y'</th><td>+</td><td>0</td><td>-</td><td>0</td><td>+</td></tr></table>",
-            options: ["A. \\((-1; 1)\\)", "B. \\((1; +\\infty)\\)", "C. \\((-\\infty; 1)\\)", "D. \\((0; +\\infty)\\)"],
-            correct: 1, // B. (1; +inf)
-            explain: "Dựa vào BBT, \\(y' > 0\\) trên khoảng \\((-\\infty; -1)\\) và \\((1; +\\infty)\\)."
+            text: "Cho hàm số \\(y = x^3 - 3x^2 + 2\\). Mệnh đề nào dưới đây đúng?",
+            options: ["A. Hàm số nghịch biến trên khoảng \\((0; 2)\\)", "B. Hàm số đồng biến trên khoảng \\((0; 2)\\)", "C. Hàm số nghịch biến trên khoảng \\((-\\infty; 0)\\)", "D. Hàm số nghịch biến trên khoảng \\((2; +\\infty)\\)"],
+            correct: 0,
+            explain: "Ta có \\(y' = 3x^2 - 6x\\). \\(y' < 0 \\Leftrightarrow 0 < x < 2\\). Vậy hàm số nghịch biến trên khoảng (0; 2)."
         },
         {
             id: "p1_2",
-            text: "Giá trị lớn nhất của hàm số \\(y = x^3 - 3x^2 - 9x + 5\\) trên đoạn \\([-2; 2]\\) bằng:",
-            options: ["A. 10", "B. 5", "C. -15", "D. 3"],
-            correct: 0, // A. 10
-            explain: "\\(y' = 3x^2 - 6x - 9\\). Nghiệm \\(x=-1, x=3\\). Trên \\([-2; 2]\\) xét \\(x=-1\\). <br> \\(f(-2)=3, f(-1)=10, f(2)=-17\\). Max = 10."
+            text: "Giá trị lớn nhất của hàm số \\(y = \\frac{2x-1}{x+1}\\) trên đoạn \\([0; 2]\\) bằng:",
+            options: ["A. -1", "B. 1", "C. 0", "D. 2"],
+            correct: 1,
+            explain: "Hàm phân thức bậc 1/1 đơn điệu trên từng khoảng xác định. \\(y' = \\frac{3}{(x+1)^2} > 0\\) (đồng biến). Max tại \\(x=2\\). \\(y(2) = \\frac{4-1}{2+1} = 1\\)."
         },
         {
             id: "p1_3",
-            text: "Tiệm cận đứng của đồ thị hàm số \\(y = \\frac{2x - 1}{x + 1}\\) là đường thẳng:",
-            options: ["A. \\(x = 2\\)", "B. \\(y = -1\\)", "C. \\(x = -1\\)", "D. \\(y = 2\\)"],
-            correct: 2, // C. x = -1
-            explain: "Tiệm cận đứng là nghiệm của mẫu số: \\(x + 1 = 0 \\Rightarrow x = -1\\)."
+            text: "Đồ thị hàm số \\(y = \\frac{x - 2}{x^2 - 4}\\) có bao nhiêu đường tiệm cận đứng?",
+            options: ["A. 0", "B. 1", "C. 2", "D. 3"],
+            correct: 1,
+            explain: "\\(y = \\frac{x-2}{(x-2)(x+2)} = \\frac{1}{x+2}\\) (với \\(x \\ne 2\\)). Chỉ có 1 tiệm cận đứng là \\(x = -2\\)."
         },
         {
             id: "p1_4",
-            text: "Đường cong trong hình vẽ bên là đồ thị của hàm số nào dưới đây? (Hình dáng: Bậc 3, hệ số a > 0, đi qua gốc tọa độ)",
-            options: ["A. \\(y = x^3 - 3x\\)", "B. \\(y = -x^3 + 3x\\)", "C. \\(y = x^4 - 2x^2\\)", "D. \\(y = \\frac{x+1}{x-1}\\)"],
-            correct: 0, // A
-            explain: "Đồ thị dáng chữ N thuận => bậc 3, a > 0. Loại B, C, D. Chọn A."
+            text: "Đường cong trong hình vẽ là đồ thị của hàm số nào? (Mô tả: Đồ thị hàm bậc 4 trùng phương, quay bề lõm lên trên, cắt Oy tại y=-1, có 3 cực trị)",
+            options: ["A. \\(y = x^4 - 2x^2 - 1\\)", "B. \\(y = -x^4 + 2x^2 - 1\\)", "C. \\(y = x^4 + 2x^2 - 1\\)", "D. \\(y = x^3 - 3x - 1\\)"],
+            correct: 0,
+            explain: "Dạng trùng phương \\(a>0\\) (lõm lên) => loại B. Có 3 cực trị nên \\(a,b\\) trái dấu => loại C. Loại D vì là bậc 3. Chọn A."
         },
         {
             id: "p1_5",
-            text: "Trong không gian Oxyz, cho \\(\\vec{u} = (1; 2; 3)\\) và \\(\\vec{v} = (2x; y-1; z)\\). Để \\(\\vec{u} = \\vec{v}\\) thì giá trị của \\(x, y, z\\) là:",
-            options: ["A. \\(x=2, y=3, z=3\\)", "B. \\(x=0.5, y=3, z=3\\)", "C. \\(x=0.5, y=1, z=3\\)", "D. \\(x=1, y=2, z=3\\)"],
-            correct: 1, // B
-            explain: "\\(2x=1 \\Rightarrow x=0.5\\); \\(y-1=2 \\Rightarrow y=3\\); \\(z=3\\)."
+            text: "Trong không gian Oxyz, cho \\(\\vec{a} = (1; 2; -3)\\) và \\(\\vec{b} = (-2; 2; 0)\\). Tọa độ vectơ \\(\\vec{u} = 2\\vec{a} + \\vec{b}\\) là:",
+            options: ["A. \\((0; 6; -6)\\)", "B. \\((4; 6; -6)\\)", "C. \\((0; 6; -3)\\)", "D. \\((0; 2; -6)\\)"],
+            correct: 0,
+            explain: "\\(2\\vec{a} = (2; 4; -6)\\). \\(\\vec{u} = (2-2; 4+2; -6+0) = (0; 6; -6)\\)."
         },
         {
             id: "p1_6",
-            text: "Trong không gian Oxyz, cho điểm \\(A(1; -2; 5)\\). Hình chiếu vuông góc của A lên mặt phẳng (Oxy) có tọa độ là:",
-            options: ["A. \\((1; -2; 0)\\)", "B. \\((0; 0; 5)\\)", "C. \\((1; 0; 5)\\)", "D. \\((0; -2; 0)\\)"],
-            correct: 0, // A
-            explain: "Chiếu lên (Oxy) thì giữ nguyên hoành và tung, cao độ z = 0."
+            text: "Trong không gian Oxyz, trung điểm của đoạn thẳng nối hai điểm \\(M(2; -4; 6)\\) và \\(N(4; 0; -2)\\) có tọa độ là:",
+            options: ["A. \\((3; -2; 2)\\)", "B. \\((6; -4; 4)\\)", "C. \\((3; -2; 4)\\)", "D. \\((1; 2; -4)\\)"],
+            correct: 0,
+            explain: "Tọa độ trung điểm \\(I(\\frac{2+4}{2}; \\frac{-4+0}{2}; \\frac{6+(-2)}{2}) = (3; -2; 2)\\)."
         },
         {
             id: "p1_7",
-            text: "Trong không gian Oxyz, cho \\(\\vec{a} = (2; -1; 3)\\) và \\(\\vec{b} = (1; 1; -1)\\). Tọa độ của vectơ \\(\\vec{u} = \\vec{a} - 2\\vec{b}\\) là:",
-            options: ["A. \\((0; -3; 5)\\)", "B. \\((0; -3; 1)\\)", "C. \\((4; 1; 1)\\)", "D. \\((-1; 3; -5)\\)"],
-            correct: 0, // A
-            explain: "\\(\\vec{u} = (2-2(1); -1-2(1); 3-2(-1)) = (0; -3; 5)\\)."
+            text: "Trong không gian Oxyz, cho \\(\\vec{u} = (x; 2; 1)\\) và \\(\\vec{v} = (2; 1; -4)\\). Để \\(\\vec{u} \\perp \\vec{v}\\) thì giá trị của x là:",
+            options: ["A. x = 1", "B. x = -1", "C. x = 2", "D. x = 3"],
+            correct: 0,
+            explain: "Vuông góc khi tích vô hướng bằng 0: \\(2x + 2(1) + 1(-4) = 0 \\Leftrightarrow 2x - 2 = 0 \\Leftrightarrow x = 1\\)."
         },
         {
             id: "p1_8",
-            text: "Cho hình hộp \\(ABCD.A'B'C'D'\\). Khẳng định nào sau đây **SAI**?",
-            options: [
-                "A. \\(\\overrightarrow{AB} + \\overrightarrow{AD} = \\overrightarrow{AC}\\)",
-                "B. \\(\\overrightarrow{AB} + \\overrightarrow{AD} + \\overrightarrow{AA'} = \\overrightarrow{AC'}\\)",
-                "C. \\(\\overrightarrow{AC'} = \\overrightarrow{AC} + \\overrightarrow{AD'}\\)", // Sai
-                "D. \\(\\overrightarrow{BA} + \\overrightarrow{BC} + \\overrightarrow{BB'} = \\overrightarrow{BD'}\\)"
-            ],
-            correct: 2, // C
-            explain: "Đáp án C sai. Quy tắc hình hộp là đường chéo xuất phát từ 1 đỉnh bằng tổng 3 vectơ cạnh xuất phát từ đỉnh đó."
+            text: "Cho hình hộp \\(ABCD.A'B'C'D'\\). Đẳng thức vectơ nào sau đây **SAI**?",
+            options: ["A. \\(\\overrightarrow{AB} + \\overrightarrow{AD} + \\overrightarrow{AA'} = \\overrightarrow{AC'}\\)", "B. \\(\\overrightarrow{AC} + \\overrightarrow{AA'} = \\overrightarrow{AC'}\\)", "C. \\(\\overrightarrow{BA} + \\overrightarrow{BC} + \\overrightarrow{BB'} = \\overrightarrow{BD'}\\)", "D. \\(\\overrightarrow{AB} + \\overrightarrow{AD} = \\overrightarrow{AC'}\\)"],
+            correct: 3,
+            explain: "Đáp án D sai. \\(\\overrightarrow{AB} + \\overrightarrow{AD} = \\overrightarrow{AC}\\) (đường chéo đáy), chưa phải đường chéo hình hộp."
         },
         {
             id: "p1_9",
-            text: "Cho mẫu số liệu ghép nhóm về chiều cao (cm): [150;155): 3, [155;160): 12, [160;165): 15, [165;170): 10. Khoảng biến thiên của mẫu số liệu là:",
-            options: ["A. 20", "B. 15", "C. 5", "D. 10"],
-            correct: 0, // A
-            explain: "R = Đầu mút phải lớn nhất (170) - Đầu mút trái nhỏ nhất (150) = 20."
+            text: "Cho mẫu số liệu ghép nhóm về chiều cao (cm) của 20 học sinh: <br> <table class='data-table'><tr><th>Chiều cao</th><td>[150;155)</td><td>[155;160)</td><td>[160;165)</td><td>[165;170)</td><td>[170;175)</td></tr><tr><th>Số HS</th><td>2</td><td>4</td><td>8</td><td>5</td><td>1</td></tr></table> Khoảng biến thiên của mẫu số liệu là:",
+            options: ["A. 25", "B. 20", "C. 30", "D. 15"],
+            correct: 0,
+            explain: "Khoảng biến thiên R = Max(biên phải) - Min(biên trái) = 175 - 150 = 25."
         },
         {
             id: "p1_10",
-            text: "Nhóm chứa Mốt của mẫu số liệu ghép nhóm ở câu 9 là:",
-            options: ["A. [155; 160)", "B. [160; 165)", "C. [165; 170)", "D. [150; 155)"],
-            correct: 1, // B
-            explain: "Nhóm [160; 165) có tần số lớn nhất là 15."
+            text: "Nhóm chứa tứ phân vị thứ nhất \\(Q_1\\) của mẫu số liệu ở câu 9 là:",
+            options: ["A. [155; 160)", "B. [160; 165)", "C. [150; 155)", "D. [165; 170)"],
+            correct: 0,
+            explain: "Cỡ mẫu n=20. \\(Q_1\\) ở vị trí \\(20/4 = 5\\). Tần số tích lũy nhóm 1 là 2. Tần số tích lũy nhóm 2 là 2+4=6. Vị trí thứ 5 nằm trong nhóm 2 [155; 160)."
         }
     ];
 
-    // PHẦN 2: ĐÚNG/SAI (3 câu - 30% điểm - Mỗi ý đúng đ/s)
-    const part2DB = [
+    // --- PHẦN 2: ĐÚNG SAI (3 CÂU) ---
+    const part2Data = [
         {
             id: "p2_1",
-            text: "Cho hàm số \\(y = \\frac{x^2 + 2x + 2}{x + 1}\\). Các mệnh đề sau đúng hay sai?",
+            text: "Cho hàm số \\(y = \\frac{x^2 + x + 1}{x + 1}\\). Xét tính đúng sai của các mệnh đề:",
             sub: [
-                { text: "a) Đạo hàm của hàm số là \\(y' = \\frac{x^2 + 2x}{(x+1)^2}\\).", ans: true, explain: "Đúng. \\(y = x + 1 + \\frac{1}{x+1} \\Rightarrow y' = 1 - \\frac{1}{(x+1)^2} = \\frac{x^2+2x}{(x+1)^2}\\)." },
-                { text: "b) Hàm số có 2 điểm cực trị.", ans: true, explain: "Đúng. \\(y'=0 \\Leftrightarrow x^2+2x=0 \\Leftrightarrow x=0, x=-2\\)." },
-                { text: "c) Đồ thị hàm số có tiệm cận xiên \\(y = x + 2\\).", ans: false, explain: "Sai. Tiệm cận xiên là \\(y = x + 1\\)." },
-                { text: "d) Giá trị cực tiểu của hàm số bằng 2.", ans: true, explain: "Đúng. Tại \\(x=0\\) (cực tiểu), \\(y=2\\)." }
+                { text: "a) Tập xác định của hàm số là \\(D = \\mathbb{R} \\setminus \\{-1\\}\\).", ans: true, explain: "Đúng." },
+                { text: "b) Đạo hàm \\(y' = \\frac{x^2 + 2x}{(x+1)^2}\\).", ans: true, explain: "Đúng. \\(y = x + \\frac{1}{x+1} \\Rightarrow y' = 1 - \\frac{1}{(x+1)^2} = \\frac{x^2+2x}{(x+1)^2}\\)." },
+                { text: "c) Đồ thị hàm số có đường tiệm cận xiên là \\(y = x\\).", ans: true, explain: "Đúng. Vì \\(y = x + \\frac{1}{x+1}\\)." },
+                { text: "d) Hàm số đồng biến trên khoảng \\((-\\infty; -1)\\).", ans: false, explain: "Sai. Có đoạn nghịch biến trên \\((-2; -1)\\)." }
             ]
         },
         {
             id: "p2_2",
-            text: "Trong không gian Oxyz, cho ba điểm \\(A(1; 0; 0), B(0; 2; 0), C(0; 0; 3)\\).",
+            text: "Trong không gian Oxyz, cho \\(A(1;0;0), B(0;2;0), C(0;0;3)\\).",
             sub: [
-                { text: "a) Vectơ \\(\\overrightarrow{AB} = (-1; 2; 0)\\).", ans: true, explain: "Đúng. \\(B - A = (-1; 2; 0)\\)." },
-                { text: "b) Tam giác ABC vuông tại O.", ans: false, explain: "Sai. O không thuộc mp(ABC) và tam giác ABC có các cạnh không thỏa mãn Pytago cho tam giác vuông." },
-                { text: "c) Phương trình mặt phẳng (ABC) là \\(\\frac{x}{1} + \\frac{y}{2} + \\frac{z}{3} = 1\\).", ans: true, explain: "Đúng. Phương trình đoạn chắn." },
-                { text: "d) Diện tích tam giác ABC lớn hơn 3.", ans: true, explain: "Đúng. \\(S_{ABC} = \\frac{1}{2}\\sqrt{1^2.2^2 + 2^2.3^2 + 3^2.1^2} = \\frac{1}{2}\\sqrt{4+36+9} = 3.5 > 3\\)." }
+                { text: "a) Diện tích tam giác OAB bằng 1.", ans: true, explain: "Đúng. Tam giác vuông tại O, S = 1/2 * 1 * 2 = 1." },
+                { text: "b) Phương trình mặt phẳng (ABC) là \\(6x + 3y + 2z - 6 = 0\\).", ans: true, explain: "Đúng. PT đoạn chắn: \\(x/1 + y/2 + z/3 = 1 \\Leftrightarrow 6x+3y+2z-6=0\\)." },
+                { text: "c) Vectơ pháp tuyến của mặt phẳng (ABC) là \\((1; 2; 3)\\).", ans: false, explain: "Sai. VTPT là \\((6; 3; 2)\\)." },
+                { text: "d) Khoảng cách từ O đến mặt phẳng (ABC) bằng \\(6/7\\).", ans: true, explain: "Đúng. \\(d = \\frac{|-6|}{\\sqrt{6^2+3^2+2^2}} = \\frac{6}{\\sqrt{36+9+4}} = \\frac{6}{7}\\)." }
             ]
         },
         {
             id: "p2_3",
-            text: "Điểm kiểm tra môn Toán của hai lớp 12A và 12B được thống kê như sau:<br><table class='custom-table'><tr><th>Điểm</th><td>[0;5)</td><td>[5;7)</td><td>[7;8)</td><td>[8;9)</td><td>[9;10]</td></tr><tr><th>12A</th><td>2</td><td>8</td><td>15</td><td>10</td><td>5</td></tr><tr><th>12B</th><td>0</td><td>5</td><td>10</td><td>15</td><td>10</td></tr></table>",
+            text: "Điểm thi thử môn Toán của hai lớp 12A và 12B như sau:<br><table class='data-table'><tr><th>Điểm</th><td>[0;5)</td><td>[5;7)</td><td>[7;8)</td><td>[8;9)</td><td>[9;10]</td></tr><tr><th>Lớp 12A</th><td>1</td><td>9</td><td>15</td><td>10</td><td>5</td></tr><tr><th>Lớp 12B</th><td>0</td><td>5</td><td>10</td><td>15</td><td>10</td></tr></table>",
             sub: [
-                { text: "a) Tổng số học sinh lớp 12A là 40.", ans: true, explain: "Đúng (2+8+15+10+5=40)." },
-                { text: "b) Điểm trung bình của lớp 12B thấp hơn lớp 12A.", ans: false, explain: "Sai. Phân phối lớp 12B lệch về phía điểm cao hơn." },
-                { text: "c) Mốt của điểm thi lớp 12A thuộc nhóm [7;8).", ans: true, explain: "Đúng (tần số 15 cao nhất)." },
-                { text: "d) Lớp 12B có học lực đồng đều hơn (phương sai nhỏ hơn) lớp 12A.", ans: false, explain: "Sai. 12B trải rộng ở vùng điểm cao và có khoảng biến thiên hẹp hơn ở phần dưới nhưng tập trung mạnh ở trên, cần tính cụ thể nhưng nhìn sơ bộ 12A tập trung giữa nhiều hơn." }
+                { text: "a) Tổng số học sinh lớp 12A là 40.", ans: true, explain: "Đúng (1+9+15+10+5=40)." },
+                { text: "b) Điểm trung bình của lớp 12B cao hơn lớp 12A.", ans: true, explain: "Đúng. Phân phối điểm lớp 12B lệch về phía điểm cao nhiều hơn." },
+                { text: "c) Nhóm chứa Mốt của lớp 12A là [7; 8).", ans: true, explain: "Đúng. Tần số lớn nhất là 15 thuộc nhóm [7;8)." },
+                { text: "d) Lớp 12A có học lực đồng đều hơn (độ lệch chuẩn nhỏ hơn) lớp 12B.", ans: true, explain: "Đúng. Điểm lớp 12A tập trung quanh mức khá, 12B trải rộng hơn ở mức giỏi/xuất sắc." }
             ]
         }
     ];
 
-    // PHẦN 3: TRẢ LỜI NGẮN (3 câu - 30% điểm)
-    const part3DB = [
+    // --- PHẦN 3: TRẢ LỜI NGẮN (3 CÂU) ---
+    const part3Data = [
         {
             id: "p3_1",
-            text: "Một doanh nghiệp dự kiến lợi nhuận khi sản xuất \\(x\\) sản phẩm (đơn vị: nghìn cái) được cho bởi hàm số \\(P(x) = -x^3 + 12x^2 - 10\\) (đơn vị: triệu đồng), với \\(0 \\le x \\le 10\\). Tìm số lượng sản phẩm cần sản xuất để lợi nhuận đạt giá trị lớn nhất.",
-            ans: 8,
+            text: "Một công ty bất động sản ước tính rằng lợi nhuận (đơn vị: tỷ đồng) khi xây dựng x căn hộ trong một dự án được cho bởi hàm số \\(P(x) = -x^3 + 30x^2 - 100\\), với \\(0 \\le x \\le 25\\). Tìm số lượng căn hộ cần xây dựng để lợi nhuận đạt giá trị lớn nhất.",
+            ans: 20,
             tolerance: 0.1,
-            explain: "\\(P'(x) = -3x^2 + 24x\\). \\(P'(x)=0 \\Leftrightarrow x=0, x=8\\). <br> Lập BBT trên [0;10], Max tại \\(x=8\\)."
+            explain: "\\(P'(x) = -3x^2 + 60x\\). \\(P'(x) = 0 \\Leftrightarrow x=0, x=20\\). BBT trên [0;25] cho thấy Max tại x=20."
         },
         {
             id: "p3_2",
-            text: "Trong một phòng học, người ta thiết lập hệ tọa độ Oxyz với góc phòng là gốc O. Một chiếc đèn được treo tại vị trí \\(M(4; 3; 2.5)\\) (đơn vị mét). Tính khoảng cách từ chiếc đèn đến góc phòng O (Làm tròn đến hàng phần mười).",
-            ans: 5.6,
-            tolerance: 0.2,
-            explain: "\\(OM = \\sqrt{4^2 + 3^2 + 2.5^2} = \\sqrt{16+9+6.25} = \\sqrt{31.25} \\approx 5.59\\). Làm tròn 5.6."
+            text: "Một chiếc máy bay cất cánh từ sân bay (gốc tọa độ O). Vị trí của máy bay sau t phút được tính bởi công thức tọa độ \\((x;y;z) = (2t; 3t; 0.5t)\\) (đơn vị km). Tính khoảng cách từ máy bay đến sân bay sau 10 phút (làm tròn đến hàng đơn vị).",
+            ans: 36,
+            tolerance: 1,
+            explain: "Tại t=10, tọa độ là (20; 30; 5). Khoảng cách \\(d = \\sqrt{20^2 + 30^2 + 5^2} = \\sqrt{400+900+25} = \\sqrt{1325} \\approx 36.4\\). Làm tròn 36."
         },
         {
             id: "p3_3",
-            text: "Thống kê thời gian chạy 100m của một nhóm vận động viên: <br> <table class='custom-table'><tr><th>Giây</th><td>[10;11)</td><td>[11;12)</td><td>[12;13)</td><td>[13;14)</td></tr><tr><th>Số người</th><td>5</td><td>15</td><td>10</td><td>10</td></tr></table> Tính trung vị của mẫu số liệu (Làm tròn đến hàng phần trăm).",
-            ans: 11.83, 
-            tolerance: 0.1,
-            explain: "N=40. Vị trí trung vị: 20, 21. Thuộc nhóm [11;12). <br> \\(M_e = 11 + \\frac{20 - 5}{15} \\times 1 = 11 + 1 = 12\\). <br> *Chỉnh lại:* N/2=20. Tần số tích lũy trước đó là 5. <br> \\(M_e = 11 + \\frac{20-5}{15} \\times 1 = 11 + 1 = 12\\). <br> *Khoan, đề bài yêu cầu số liệu khác để ra lẻ:* <br> Giả sử nhóm [10;11) có 8 người. <br> N=43. N/2=21.5. Nhóm [11;12) có 15 người. <br> \\(M_e = 11 + \\frac{21.5 - 8}{15} \\times 1 = 11 + 0.9 = 11.9\\). <br> **Để đơn giản, dùng đề bài gốc:** 5, 15, 10, 10. <br> Me = 12.00."
+            text: "Thống kê thời gian (phút) giải quyết khiếu nại của 50 khách hàng: <br> <table class='data-table'><tr><th>Thời gian</th><td>[5;10)</td><td>[10;15)</td><td>[15;20)</td><td>[20;25)</td><td>[25;30)</td></tr><tr><th>Số KH</th><td>4</td><td>12</td><td>18</td><td>10</td><td>6</td></tr></table> Tính trung vị của mẫu số liệu (làm tròn đến 1 chữ số thập phân).",
+            ans: 17.2,
+            tolerance: 0.2,
+            explain: "N=50, N/2=25. Nhóm chứa Me là [15;20) (tích lũy trước đó là 16). <br> \\(M_e = 15 + \\frac{25-16}{18} \\times 5 = 15 + \\frac{9}{18} \\times 5 = 15 + 2.5 = 17.5\\). <br> *(Xin lỗi, tôi tính nhầm ở bước nháp, đáp án đúng là 17.5. Nhưng để code nhận diện đúng, tôi sẽ sửa tolerance rộng hơn hoặc cập nhật đáp án chính xác là 17.5)*. <br> **Cập nhật đáp án:** 17.5"
         }
     ];
-    
-    // Điều chỉnh đáp án câu 3 phần 3 cho chính xác theo công thức
-    // N=40. N/2 = 20. C=5 (tích lũy nhóm 1). fm=15. h=1. L=11.
-    // Me = 11 + ((20-5)/15)*1 = 12.
-    // Để bài toán khó hơn xíu, ta đổi số liệu câu p3_3 ngay tại đây để ra số thập phân.
-    part3DB[2].text = "Thống kê thời gian (phút) giải một bài toán của 40 học sinh: <br> <table class='custom-table'><tr><th>Thời gian</th><td>[4;6)</td><td>[6;8)</td><td>[8;10)</td><td>[10;12)</td></tr><tr><th>Số HS</th><td>8</td><td>14</td><td>12</td><td>6</td></tr></table> Tính trung vị của mẫu số liệu (Làm tròn đến 2 chữ số thập phân).";
-    // N=40. N/2=20. Nhóm chứa Me: [6;8) (tích lũy 8, nhóm này 14 => đủ 22).
-    // L=6, C=8, fm=14, h=2.
-    // Me = 6 + ((20-8)/14)*2 = 6 + (12/14)*2 = 6 + 12/7 = 6 + 1.714... = 7.71
-    part3DB[2].ans = 7.71;
-    part3DB[2].explain = "N=40. Vị trí trung vị 20. Nhóm chứa trung vị [6;8). <br> \\(M_e = 6 + \\frac{20-8}{14} \\times 2 \\approx 7.71\\).";
+    // Sửa lại đáp án chuẩn cho p3_3
+    part3Data[2].ans = 17.5;
 
+    // ================= LOGIC XỬ LÝ (JS) =================
 
-    // ================= XỬ LÝ LOGIC (JavaScript) =================
-
-    // Hàm đảo mảng (Fisher-Yates Shuffle)
+    // Hàm đảo mảng
     function shuffle(array) {
-        let currentIndex = array.length, randomIndex;
-        while (currentIndex != 0) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex--;
-            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
         }
         return array;
     }
 
-    // Render đề thi
+    // Render câu hỏi
     function renderQuiz() {
-        const quizContainer = document.getElementById("quiz-content");
+        const area = document.getElementById("render-area");
         let html = "";
 
-        // --- PHẦN 1 ---
-        html += `<div class="part-header">PHẦN I. TRẮC NGHIỆM NHIỀU LỰA CHỌN (10 Câu)</div>`;
-        const p1 = shuffle([...part1DB]);
-        p1.forEach((q, index) => {
+        // Part 1
+        html += `<div class="part-header">PHẦN I. TRẮC NGHIỆM (10 CÂU)</div>`;
+        const p1 = shuffle([...part1Data]);
+        p1.forEach((q, idx) => {
             html += `
             <div class="question-box" id="q_${q.id}">
-                <span class="q-title">Câu ${index + 1}:</span>
-                <span class="q-text">${q.text}</span>
-                ${q.content ? `<div style="margin:10px 0">${q.content}</div>` : ''}
+                <span class="q-title">Câu ${idx+1}:</span>
+                <div style="margin-bottom:10px;">${q.text}</div>
+                ${q.content ? q.content : ''}
                 <div class="options-grid">
                     ${q.options.map((opt, i) => `
                         <label class="option-label">
@@ -329,148 +308,133 @@
                         </label>
                     `).join('')}
                 </div>
-                <div class="feedback" id="feed_${q.id}"></div>
+                <div class="feedback" id="fb_${q.id}"></div>
             </div>`;
         });
 
-        // --- PHẦN 2 ---
-        html += `<div class="part-header">PHẦN II. TRẮC NGHIỆM ĐÚNG SAI (3 Câu)</div>`;
-        const p2 = shuffle([...part2DB]);
-        p2.forEach((q, index) => {
+        // Part 2
+        html += `<div class="part-header">PHẦN II. ĐÚNG SAI (3 CÂU)</div>`;
+        const p2 = shuffle([...part2Data]);
+        p2.forEach((q, idx) => {
             html += `
             <div class="question-box" id="q_${q.id}">
-                <span class="q-title">Câu ${index + 1}: ${q.text}</span>
-                ${q.sub.map((sub, i) => `
-                    <div class="tf-item">
-                        <div class="tf-content">${sub.text}</div>
-                        <div class="tf-choices">
+                <span class="q-title">Câu ${idx+1}: ${q.text}</span>
+                ${q.sub.map((s, i) => `
+                    <div class="tf-row">
+                        <div class="tf-content">${s.text}</div>
+                        <div class="tf-options">
                             <label><input type="radio" name="${q.id}_${i}" value="true"> Đúng</label>
                             <label><input type="radio" name="${q.id}_${i}" value="false"> Sai</label>
                         </div>
                     </div>
-                    <div class="feedback" id="feed_${q.id}_${i}" style="margin-top:5px; padding:5px;"></div>
+                    <div class="feedback" id="fb_${q.id}_${i}" style="margin-top:5px; padding:5px;"></div>
                 `).join('')}
             </div>`;
         });
 
-        // --- PHẦN 3 ---
-        html += `<div class="part-header">PHẦN III. TRẢ LỜI NGẮN (3 Câu)</div>`;
-        const p3 = shuffle([...part3DB]);
-        p3.forEach((q, index) => {
+        // Part 3
+        html += `<div class="part-header">PHẦN III. TRẢ LỜI NGẮN (3 CÂU)</div>`;
+        const p3 = shuffle([...part3Data]);
+        p3.forEach((q, idx) => {
             html += `
             <div class="question-box" id="q_${q.id}">
-                <span class="q-title">Câu ${index + 1}:</span>
-                <span class="q-text">${q.text}</span>
-                <div style="margin-top: 15px;">
-                    <input type="number" step="0.01" class="short-input" name="${q.id}" placeholder="Nhập kết quả (ví dụ: 5.5)">
-                </div>
-                <div class="feedback" id="feed_${q.id}"></div>
+                <span class="q-title">Câu ${idx+1}:</span>
+                <div style="margin-bottom:10px;">${q.text}</div>
+                Đáp án: <input type="number" step="0.01" class="short-input" name="${q.id}" placeholder="Nhập số thập phân...">
+                <div class="feedback" id="fb_${q.id}"></div>
             </div>`;
         });
 
-        quizContainer.innerHTML = html;
-        MathJax.typeset(); // Render công thức toán
+        area.innerHTML = html;
+        MathJax.typeset();
     }
 
-    // Timer Logic
-    let timeLeft = 60 * 60; // 60 phút
-    const timerElement = document.getElementById("timer");
-    
-    const countdown = setInterval(() => {
-        const minutes = Math.floor(timeLeft / 60);
-        let seconds = timeLeft % 60;
-        seconds = seconds < 10 ? '0' + seconds : seconds;
-        timerElement.innerHTML = `${minutes}:${seconds}`;
-        
-        if (timeLeft <= 0) {
-            clearInterval(countdown);
-            alert("Hết giờ làm bài!");
+    // Timer
+    let time = 60 * 60;
+    const timerElem = document.getElementById("timer");
+    const interval = setInterval(() => {
+        time--;
+        let m = Math.floor(time / 60);
+        let s = time % 60;
+        timerElem.innerText = `${m}:${s < 10 ? '0'+s : s}`;
+        if (time <= 0) {
+            clearInterval(interval);
             submitQuiz();
+            alert("Hết giờ làm bài!");
         }
-        timeLeft--;
     }, 1000);
 
-    // Chấm điểm Logic
+    // Grading Logic
     function submitQuiz() {
-        clearInterval(countdown);
+        clearInterval(interval);
         let score = 0;
-        let maxRawScore = 0; // Tổng điểm thô để quy đổi
+        let maxRaw = 0;
 
-        // Tính điểm Phần 1 (0.25đ / câu)
-        part1DB.forEach(q => {
-            maxRawScore += 0.25;
-            const selected = document.querySelector(`input[name="${q.id}"]:checked`);
-            const feedback = document.getElementById(`feed_${q.id}`);
-            const box = document.getElementById(`q_${q.id}`);
+        // Grade Part 1 (0.25 pts)
+        part1Data.forEach(q => {
+            maxRaw += 0.25;
+            const sel = document.querySelector(`input[name="${q.id}"]:checked`);
+            const fb = document.getElementById(`fb_${q.id}`);
+            fb.style.display = "block";
             
-            feedback.style.display = 'block';
-            if (selected && parseInt(selected.value) === q.correct) {
+            if (sel && parseInt(sel.value) === q.correct) {
                 score += 0.25;
-                feedback.className = "feedback correct";
-                feedback.innerHTML = `<b>Chính xác!</b> ${q.explain}`;
+                fb.className = "feedback correct-fb";
+                fb.innerHTML = `<b>Chính xác!</b> ${q.explain}`;
             } else {
-                feedback.className = "feedback incorrect";
-                feedback.innerHTML = `<b>Sai rồi.</b> Đáp án đúng là: ${q.options[q.correct].charAt(0)}. <br> ${q.explain}`;
+                fb.className = "feedback wrong-fb";
+                fb.innerHTML = `<b>Sai rồi.</b> Đáp án đúng: ${q.options[q.correct].charAt(0)}. <br> ${q.explain}`;
             }
         });
 
-        // Tính điểm Phần 2 (Giả định mỗi ý nhỏ 0.1đ - Trong thực tế bộ GD có cách tính phức tạp hơn: 1 ý 0.1, 2 ý 0.25, 3 ý 0.5, 4 ý 1.0)
-        // Để đơn giản code và công bằng theo tỷ lệ: Mỗi ý 0.25 điểm (Tổng 1 câu 1.0đ)
-        part2DB.forEach(q => {
-            q.sub.forEach((sub, i) => {
-                maxRawScore += 0.25;
-                const selected = document.querySelector(`input[name="${q.id}_${i}"]:checked`);
-                const feedback = document.getElementById(`feed_${q.id}_${i}`);
+        // Grade Part 2 (0.25 pts per sub-question)
+        part2Data.forEach(q => {
+            q.sub.forEach((s, i) => {
+                maxRaw += 0.25;
+                const sel = document.querySelector(`input[name="${q.id}_${i}"]:checked`);
+                const fb = document.getElementById(`fb_${q.id}_${i}`);
+                fb.style.display = "block";
+                const val = sel ? (sel.value === 'true') : null;
                 
-                feedback.style.display = 'block';
-                const userVal = selected ? (selected.value === 'true') : null;
-                
-                if (userVal === sub.ans) {
+                if (val === s.ans) {
                     score += 0.25;
-                    feedback.style.color = 'green';
-                    feedback.innerHTML = `✓ ${sub.explain}`;
+                    fb.innerHTML = `<span style="color:green">✓ ${s.explain}</span>`;
                 } else {
-                    feedback.style.color = 'red';
-                    feedback.innerHTML = `✗ Đáp án đúng: ${sub.ans ? 'Đúng' : 'Sai'}.`;
+                    fb.innerHTML = `<span style="color:red">✗ Đáp án: ${s.ans ? 'Đúng' : 'Sai'}.</span>`;
                 }
             });
         });
 
-        // Tính điểm Phần 3 (0.5đ / câu) -> Trong ma trận đề mẫu thường là 0.5/câu
-        part3DB.forEach(q => {
-            maxRawScore += 0.5;
-            const input = document.querySelector(`input[name="${q.id}"]`);
-            const feedback = document.getElementById(`feed_${q.id}`);
-            const box = document.getElementById(`q_${q.id}`);
-            
-            feedback.style.display = 'block';
-            const val = parseFloat(input.value);
+        // Grade Part 3 (0.5 pts)
+        part3Data.forEach(q => {
+            maxRaw += 0.5;
+            const inp = document.querySelector(`input[name="${q.id}"]`);
+            const fb = document.getElementById(`fb_${q.id}`);
+            fb.style.display = "block";
+            const val = parseFloat(inp.value);
             
             if (!isNaN(val) && Math.abs(val - q.ans) <= q.tolerance) {
                 score += 0.5;
-                feedback.className = "feedback correct";
-                feedback.innerHTML = `<b>Chính xác!</b> Đáp án: ${q.ans}. <br> ${q.explain}`;
+                fb.className = "feedback correct-fb";
+                fb.innerHTML = `<b>Chính xác!</b> Kết quả: ${q.ans}. <br> ${q.explain}`;
             } else {
-                feedback.className = "feedback incorrect";
-                feedback.innerHTML = `<b>Sai.</b> Đáp án đúng: ${q.ans}. <br> ${q.explain}`;
+                fb.className = "feedback wrong-fb";
+                fb.innerHTML = `<b>Sai.</b> Đáp án đúng: ${q.ans}. <br> ${q.explain}`;
             }
         });
 
-        // Quy đổi ra thang 10
-        // Tổng điểm thô hiện tại: 10*0.25 + 3*4*0.25 + 3*0.5 = 2.5 + 3 + 1.5 = 7.0 (Chưa chuẩn thang 10)
-        // Ta sẽ nhân hệ số để quy về 10.
-        const finalScore10 = (score / maxRawScore) * 10;
-
-        document.getElementById("finalScore").innerText = finalScore10.toFixed(2);
+        // Calculate Final Score
+        const final = (score / maxRaw) * 10;
+        document.getElementById("finalScore").innerText = final.toFixed(2);
         document.getElementById("resultModal").style.display = "flex";
         
-        // Disable nút nộp
+        // Disable Submit
         const btn = document.querySelector(".btn-submit");
         btn.disabled = true;
         btn.innerText = "ĐÃ HOÀN THÀNH";
-        btn.style.backgroundColor = "#6c757d";
+        btn.classList.add("btn-disabled");
         
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
     }
 
     function closeModal() {
@@ -478,9 +442,7 @@
     }
 
     // Init
-    renderQuiz();
-
+    window.onload = renderQuiz;
 </script>
-
 </body>
 </html>
